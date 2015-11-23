@@ -1,5 +1,7 @@
 "use strict";
 
+google.maps.event.addDomListener(window, 'load', initialize);
+
 function initialize() {
     //initialize map on UW
     var mapOptions = {
@@ -152,33 +154,29 @@ function initialize() {
     //check if the event time is still valid
     function checkTime(start, end){
         if (end) {
-        var splitTime1 = end.split("T");
-        var midSplit = splitTime1[1].split("-");
-        var splitTime2 = midSplit[0].split(":");
-        var hour = splitTime2[0];
-        var min = splitTime2[1];
-        var sec = splitTime2[2];
-        var currentdate = new Date();
-        if(hour < currentdate.getHours()){ 
-            return false; 
-        }else if (hour == currentdate.getHours()) {
-            if(min < currentdate.getMinutes()){
-                return false;
-            }else if(min == currentdate.getMinutes()){
-                return (sec - currentdate.getSeconds() >= 0);
+            var splitTime1 = end.split("T");
+            var midSplit = splitTime1[1].split("-");
+            var splitTime2 = midSplit[0].split(":");
+            var hour = splitTime2[0];
+            var min = splitTime2[1];
+            var sec = splitTime2[2];
+            var currentdate = new Date();
+            if(hour < currentdate.getHours()){ 
+                return false; 
+            } else if (hour == currentdate.getHours()) {
+                if(min < currentdate.getMinutes()){
+                    return false;
+                }else if(min == currentdate.getMinutes()){
+                    return (sec - currentdate.getSeconds() >= 0);
+                }else{
+                    return true;
+                }
             }else{
                 return true;
             }
-        }else{
-            return true;
         }
     }
-    }
 }
-
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
 
 /*//parses the entered response in the search box
     function parseResponse() {
