@@ -28,12 +28,13 @@
   		<input type="text" id="zip" placeholder="enter zip code" maxlength="5" />
 
 		<button id = "find">Find Events</button> </div>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 		</div>
 	
 	
 		</div>
 		<div id="map-canvas"></div>	
-		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+		
 	</body>
 </html>
 
