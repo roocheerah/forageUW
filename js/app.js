@@ -7,9 +7,14 @@ function initialize() {
         zoom: 15
     };
 
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: { lat: 47.6550, lng: -122.3080},
+        zoom: 15
+      });
+    }
     //load objects
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
     var find = document.getElementById('find');
 
     //add events
@@ -169,8 +174,6 @@ function initialize() {
         }
     }
     }
-
-
 }
 
 
