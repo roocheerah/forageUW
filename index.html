@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="test.css">
+		<script src="test.js" type="text/javascript" charset="UTF-8"></script>
+		 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqN2adCmsc3ov72hoOy6GKseL1p1_JmJs&amp;libraries=geometry">
+		 </script>
+		 <link href="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpa1/v/t34.0-12/10744596_10152617919086676_227863107_n.jpg?oh=8104f6102d7f2634bdd551f12d5a3be5&oe=54445779&__gda__=1413833000_1f64472e9115bab121ddf1a45f5c2467" type="image/jpg" 
+        rel="shortcut icon"/>
+
+
+</script>
+	</head>
+	<body id="body">
+		<script>
+			var accessKey;
+			
+    			function statusChangeCallback(response) {
+                
+                if (response.status === 'connected') {
+                	console.log("connected!");
+                    // Logged into your app and Facebook.
+                    accessKey = response.authResponse.accessToken;
+                } else if (response.status === 'not_authorized') {
+                    console.log("needs to log into app");
+                } else {
+                    console.log("needs to log into fb");
+                }
+            }
+            function checkLoginState() {
+                FB.getLoginStatus(function(response) {
+                    statusChangeCallback(response);
+                });
+            }
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId      : '955986817751920',
+                    xfbml      : true,
+                    version    : 'v2.1'
+                });
+                FB.getLoginStatus(function(response) {
+                    statusChangeCallback(response);
+                });
+                
+                
+            };
+
+
+
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));	
+		  
+		</script>
+				<script type="text/javascript" src="test.js"></script>
+
+		<div id="moveLeft">
+		<span class ="title">forage </span><h1>UW</h1>
+		<p>
+  		Let's face it: paying for tuition, textbooks, and housing sucks. <br> You shouldn't have to pay for food too.<br> Forage is your tool to find events on campus with <br> free food so you can free your wallets.
+		 </p>
+
+		<div id="sidebar">
+  		<input type="text" id="zip" placeholder="enter zip code" maxlength="5" />
+
+		<button id = "find">Find Events</button> </div>
+		</div>
+	
+	
+		</div>
+		<div id="map-canvas"></div>	
+
+		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+	</body>
+</html>
+
