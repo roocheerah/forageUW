@@ -6,4 +6,5 @@ function initMap() {
     center: { lat: 47.6550, lng: -122.3080},
     zoom: 15
   });
+  google.maps.event.addDomListener(window, 'load', initialize);
 }
