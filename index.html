@@ -16,55 +16,14 @@
 </script>
 	</head>
 	<body id="body">
-
-         <script>
-          window.fbAsyncInit = function() {
-            FB.init({
-              appId      : '932297393472020',
-              xfbml      : true,
-              version    : 'v2.5'
-            });
-          };
-
-          (function(d, s, id){
-             var js, fjs = d.getElementsByTagName(s)[0];
-             if (d.getElementById(id)) {return;}
-             js = d.createElement(s); js.id = id;
-             js.src = "//connect.facebook.net/en_US/sdk.js";
-             fjs.parentNode.insertBefore(js, fjs);
-           }(document, 'script', 'facebook-jssdk'));
-        </script>
-
-
-		<script>
-			var accessKey;
-			
-    			function statusChangeCallback(response) {
-                
-                if (response.status === 'connected') {
-                	console.log("connected!");
-                    // Logged into your app and Facebook.
-                    accessKey = response.authResponse.accessToken;
-                } else if (response.status === 'not_authorized') {
-                    console.log("needs to log into app");
-                } else {
-                    console.log("needs to log into fb");
-                }
-            }
-            function checkLoginState() {
-                FB.getLoginStatus(function(response) {
-                    statusChangeCallback(response);
-                });
-            }
-
-		</script>
+        <script type="text/javascript" src="login.js"></script>
 		<script type="text/javascript" src="app.js"></script>
 
 		<div id="moveLeft">
 		<span class ="title">forage </span><h1>UW</h1>
 		<p>
-  		Let's face it: paying for tuition, textbooks, and housing sucks. <br> You shouldn't have to pay for food too.<br> Forage is your tool to find events on campus with <br> free food so you can free your wallets.
-		 </p>
+  		    Let's face it: paying for tuition, textbooks, and housing sucks. <br> You shouldn't have to pay for food too.<br> Forage is your tool to find events on campus with <br> free food so you can free your wallets.
+		</p>
 
 		<div id="sidebar">
   		<input type="text" id="zip" placeholder="enter zip code" maxlength="5" />
@@ -75,7 +34,7 @@
 	
 		</div>
 		<div id="map-canvas"></div>	
-
+        <script type="text/javascript" src="login.js"></script>
 		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 	</body>
 </html>
