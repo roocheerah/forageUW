@@ -5,8 +5,8 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="test.css">
-		<script src="test.js" type="text/javascript" charset="UTF-8"></script>
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<script src="app.js" type="text/javascript" charset="UTF-8"></script>
 		 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqN2adCmsc3ov72hoOy6GKseL1p1_JmJs&amp;libraries=geometry">
 		 </script>
 		 <link href="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpa1/v/t34.0-12/10744596_10152617919086676_227863107_n.jpg?oh=8104f6102d7f2634bdd551f12d5a3be5&oe=54445779&__gda__=1413833000_1f64472e9115bab121ddf1a45f5c2467" type="image/jpg" 
@@ -16,6 +16,26 @@
 </script>
 	</head>
 	<body id="body">
+
+         <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '932297393472020',
+              xfbml      : true,
+              version    : 'v2.5'
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+
+
 		<script>
 			var accessKey;
 			
@@ -36,31 +56,9 @@
                     statusChangeCallback(response);
                 });
             }
-            window.fbAsyncInit = function() {
-                FB.init({
-                    appId      : '955986817751920',
-                    xfbml      : true,
-                    version    : 'v2.1'
-                });
-                FB.getLoginStatus(function(response) {
-                    statusChangeCallback(response);
-                });
-                
-                
-            };
 
-
-
-            (function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));	
-		  
 		</script>
-				<script type="text/javascript" src="test.js"></script>
+		<script type="text/javascript" src="app.js"></script>
 
 		<div id="moveLeft">
 		<span class ="title">forage </span><h1>UW</h1>
