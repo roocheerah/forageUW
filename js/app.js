@@ -56,7 +56,7 @@ function initialize() {
         );
         
         for (var i = 0; i < allEventIds.length; ++i) {
-          console.log()
+          console.log(response.data[i].id);
         }
 
         for (var i = 0; i < allEventIds.length; ++i) {
