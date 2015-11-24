@@ -8,6 +8,9 @@ window.onload = function() {
   // Get the modal
   var modal = document.getElementById('myModal');
 
+  var yesButton = document.getElementById('yes');
+  var noButton = document.getElementById('no');
+
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
   // When the user clicks the button, open the modal 
@@ -21,6 +24,16 @@ window.onload = function() {
 
   function closeFunc() {
       modal.style.display = "none";
+  }
+
+  // If the user clicks on the yes button for continuing with facebook, redirect to main
+  yesButton.onclick = function() {
+    window.location.href = "http://roocheerah.github.io/forageUW/main";
+  }
+
+  // If the user clicks on the no button for not continuing with facebook.
+  noButton.onclick = function() {
+    window.location.href = "http://roocheerah.github.io/forageUW/";
   }
 
   // When the user clicks anywhere outside of the modal, close it
@@ -51,7 +64,6 @@ window.onload = function() {
 
       // Open the modal box for login stuff 
       openFunc();
-
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
