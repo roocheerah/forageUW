@@ -38,6 +38,8 @@ function initialize() {
             }
           }
         );
+        console.log("Printing out the allEventIds list");
+        console.log(allEventIds);
 
         FB.api(
           '/search',
@@ -55,6 +57,10 @@ function initialize() {
           }
         );
         
+
+        console.log("Printing out the allEventIds list again");
+        console.log(allEventIds);
+
         for (var i = 0; i < allEventIds.length; ++i) {
           console.log(allEventIds[i]);
         }
