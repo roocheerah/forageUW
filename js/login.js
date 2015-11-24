@@ -4,7 +4,32 @@ window.onload = function() {
   
 
   var accessKey;
-                  
+
+  // Get the modal
+  var modal = document.getElementById('myModal');
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+  // When the user clicks the button, open the modal 
+
+  function openFunc() {
+      modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {closeFunc()};
+
+  function closeFunc() {
+      modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event){
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+  
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
@@ -15,7 +40,18 @@ window.onload = function() {
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       accessKey = response.authResponse.accessToken;
-      testAPI();
+      // Need to have a pop-up dialog for continuing with previous users
+      //var cont = window.confirm("Continue with facebook?");
+      //if (cont) {
+        // Should redirect to a different page with the map
+      //  window.location.href = "http://roocheerah.github.io/forageUW/";
+      //} else {
+      //  window.location.href = "http://roocheerah.github.io/forageUW/";
+      //}
+
+      // Open the modal box for login stuff 
+      openFunc();
+
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -84,4 +120,5 @@ window.onload = function() {
     });
     document.getElementById('fb_button').style.visibility = "hidden";
   }
+
 };

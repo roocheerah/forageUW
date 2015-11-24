@@ -6,7 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-        <link rel="stylesheet" type="text/css" href="stylesheets/popup.css">
 	</head>
 	
     <body id="body">
@@ -17,20 +16,18 @@
       		    Let's face it: paying for tuition, textbooks, and housing sucks. <br> You shouldn't have to pay for food too.<br> Forage is your tool to find events on campus with <br> free food so you can free your wallets.
     		</p>
 
-            <script type="text/javascript" src="js/login.js"></script>
-            <div id="fb_button">
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> Sign in With Facebook</fb:login-button>
+    		<div id="sidebar">
+      		    <input type="text" id="zip" placeholder="enter zip code" maxlength="5" />
+        		<button id = "find">Find Events</button> 
             </div>
-            <div id="status"></div>
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-              <!-- Modal content -->
-              <div class="modal-content">
-                <span class="close">×</span>
-                <p>Continue with Facebook?</p>
-              </div>
-            </div>
-		</div>
+        </div>
+	
+		<div id="map-canvas"></div>	
+        <script type="text/javascript" src="js/map.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqHY9uxUXpBi2hq0KOdiHCMO3P2OnDBqQ&callback=initMap">
+        </script>
+        <script src="js/app.js" type="text/javascript" charset="UTF-8"></script>
+		
 	</body>
 </html>
 
