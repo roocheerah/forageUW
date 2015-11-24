@@ -12,29 +12,27 @@
 	</head>
 	
     <body id="body">
-        <script type="text/javascript" src="js/login.js"></script>
 
 		<div id="moveLeft">
-		<span class ="title">forage </span><h1>UW</h1>
-		<p>
-  		    Let's face it: paying for tuition, textbooks, and housing sucks. <br> You shouldn't have to pay for food too.<br> Forage is your tool to find events on campus with <br> free food so you can free your wallets.
-		</p>
+    		<span class ="title">forage </span><h1>UW</h1>
+    		<p>
+      		    Let's face it: paying for tuition, textbooks, and housing sucks. <br> You shouldn't have to pay for food too.<br> Forage is your tool to find events on campus with <br> free food so you can free your wallets.
+    		</p>
 
-		<div id="sidebar">
-  		<input type="text" id="zip" placeholder="enter zip code" maxlength="5" />
-
-		<button id = "find">Find Events</button> </div>
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+    		<div id="sidebar">
+      		    <input type="text" id="zip" placeholder="enter zip code" maxlength="5" />
+        		<button id = "find">Find Events</button> 
+            </div>
+            <script type="text/javascript" src="js/login.js"></script>
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+            <div id="status"></div>
 		</div>
 	
-	
-		</div>
 		<div id="map-canvas"></div>	
         <script type="text/javascript" src="js/map.js"></script>
-         <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqHY9uxUXpBi2hq0KOdiHCMO3P2OnDBqQ&callback=initMap">
-    </script>
-         <script src="js/app.js" type="text/javascript" charset="UTF-8"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqHY9uxUXpBi2hq0KOdiHCMO3P2OnDBqQ&callback=initMap">
+        </script>
+        <script src="js/app.js" type="text/javascript" charset="UTF-8"></script>
 		
 	</body>
 </html>
