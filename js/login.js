@@ -28,7 +28,7 @@ window.onload = function() {
 
   // If the user clicks on the yes button for continuing with facebook, redirect to main
   yesButton.onclick = function() {
-    var events = JSON.stringify(findEvents());
+    var events = findEvents();
     // saves data to local storage so the events can get picked up from any js file
     localStorage.setItem('Events', events);
     // reroute to the next page
@@ -136,8 +136,8 @@ window.onload = function() {
         // Insert your code here
         var data = response.data;
         console.log("Number of events matching that query are: " + data.length);
-        for (var i = 0; i < response.data.length; ++i) {
-          allEvents.push(response.data[i]);
+        for (var i = 0; i < data.length; ++i) {
+          allEvents.push(data[i]);
         }
       }
     );
@@ -148,11 +148,11 @@ window.onload = function() {
       {"q":"98195","type":"event"},
       function(response) {
         // Insert your code here
-        var data = response.data;
+        var data = data;
         console.log("Number of events matching that query are: " + data.length);
-        for (var i = 0; i < response.data.length; ++i) {
-          if (allEvents.indexOf(response.data[i]) == -1) {
-            allEvents.push(response.data[i]);
+        for (var i = 0; i < data.length; ++i) {
+          if (allEvents.indexOf(data[i]) == -1) {
+            allEvents.push(data[i]);
           }
         }
       }
