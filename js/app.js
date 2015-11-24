@@ -33,8 +33,8 @@ function initialize() {
             // Insert your code here
             var data = response.data;
             console.log("Number of events matching that query are: " + data.length);
-            for (var i = 0; i < response.data.length; ++i) {
-              allEventIds.push(response.data[i].id);
+            for (var i = 0; i < allEventIds.length; ++i) {
+              allEventIds.push(allEventIds[i]);
             }
           }
         );
