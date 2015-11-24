@@ -24,7 +24,7 @@ function initialize() {
        if(events) {
          //Do what you need with the object
          alert("received data");
-         alert(events);
+         console.log(events);
        }
     }
 
