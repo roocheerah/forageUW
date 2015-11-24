@@ -10,11 +10,25 @@ function initialize() {
     var find = document.getElementById('find');
 
     //add events
-    
+    loadData();
+
     find.addEventListener("click", findEvents);
     var allEventIds = [];
     var eventLoc = [];
 
+    function loadData(){
+       var events = localStorage.getItem('Events');
+       //parse to Object Literal the JSON object
+       events = JSON.parse(events);
+       //Checks whether the stored data exists
+       if(events) {
+         //Do what you need with the object
+         alert("received data");
+         //If you want to delete the object
+         localStorage.removeItem('_Account');
+       }
+    }
+    
     function findEvents() {
     	document.getElementById('map-canvas').style.visibility = "visible";
     	document.getElementById('moveLeft').style.width = "35%";

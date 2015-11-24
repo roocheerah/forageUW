@@ -28,19 +28,11 @@ window.onload = function() {
 
   // If the user clicks on the yes button for continuing with facebook, redirect to main
   yesButton.onclick = function() {
-    var eventIds = findEvents();
-
-    //window.location.href = "http://roocheerah.github.io/forageUW/main";
-  }
-
-  function saveData(_user, _pass){
-   var _account = {
-     User: _user,
-     Pass: _pass
-   };
-   //converts to JSON string the Object Literal
-   _account = JSON.stringify(_account);
-   localStorage.setItem('_Account', _account);
+    var events = JSON.stringify(findEvents());
+    // saves data to local storage so the events can get picked up from any js file
+    localStorage.setItem('Events', events);
+    // reroute to the next page
+    window.location.href = "http://roocheerah.github.io/forageUW/main";
   }
 
   // If the user clicks on the no button for not continuing with facebook.
@@ -150,9 +142,6 @@ window.onload = function() {
       }
     );
 
-    console.log("Printing out the allEventIds list");
-    console.log(allEvents[0]);
-
     FB.api(
       '/search',
       'GET',
@@ -171,17 +160,7 @@ window.onload = function() {
 
     console.log("Printing out the allEventIds list again");
     console.log(allEvents);
-
-    /*for (var i = 0; i < allEventIds.length; ++i) {
-      console.log(allEventIds[i]);
-    }*/
-
-    /*for (var i = 0; i < allEventIds.length; ++i) {
-      FB.api("/" + allEventIds[i], function(response) {
-          parseFacebookData(response);
-      });   
-    }*/
-
+    return allEvents;
   }
 
   // Here we run a very simple test of the Graph API after login is
