@@ -25,10 +25,23 @@ function initialize() {
     	//document.getElementById('moveLeft').style.transform = "translate3d(200px,200px,0px)";
     	//document.getElementById('moveLeft').style.animationTimingFunction = "ease-in";
 
-        FB.api('/search?q=98105&type=event', function(response) {
+        FB.api(
+          '/search',
+          'GET',
+          {"q":"98105","type":"event"},
+          function(response) {
+              // Insert your code here
+              var data = response.data;
+              console.log("Number of events matching that query are: " + data.length);
+
+          }
+        );
+        /*FB.api('/search?q=98105&type=event', function(response) {
+            console.log(response.data);
             for (var i = 0; i < response.data.length; ++i) {
                 allEventIds.push(response.data[i].id);
             }
+
             FB.api('/search?q=98195&type=event', function(response) {
                 for (var i = 0; i < response.data.length; ++i) {
                     allEventIds.push(response.data[i].id);
@@ -40,7 +53,7 @@ function initialize() {
                     });   
                 }
             });
-        });
+        });*/
     }
 
     //makes a new google maps object using the latitudes and longitudes
