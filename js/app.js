@@ -54,7 +54,11 @@ function initialize() {
             }
           }
         );
-        console.log(allEventIds);
+        
+        for (var i = 0; i < allEventIds.length; ++i) {
+          console.log()
+        }
+
         for (var i = 0; i < allEventIds.length; ++i) {
           FB.api("/" + allEventIds[i], function(response) {
               parseFacebookData(response);
