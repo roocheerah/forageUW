@@ -28,7 +28,19 @@ window.onload = function() {
 
   // If the user clicks on the yes button for continuing with facebook, redirect to main
   yesButton.onclick = function() {
-    window.location.href = "http://roocheerah.github.io/forageUW/main";
+    var eventIds = findEvents();
+
+    //window.location.href = "http://roocheerah.github.io/forageUW/main";
+  }
+
+  function saveData(_user, _pass){
+   var _account = {
+     User: _user,
+     Pass: _pass
+   };
+   //converts to JSON string the Object Literal
+   _account = JSON.stringify(_account);
+   localStorage.setItem('_Account', _account);
   }
 
   // If the user clicks on the no button for not continuing with facebook.
@@ -120,6 +132,57 @@ window.onload = function() {
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+
+
+  function findEvents() {
+    var allEvents = [];
+    FB.api(
+      '/search',
+      'GET',
+      {"q":"98105","type":"event"},
+      function(response) {
+        // Insert your code here
+        var data = response.data;
+        console.log("Number of events matching that query are: " + data.length);
+        for (var i = 0; i < response.data.length; ++i) {
+          allEvents.push(response.data[i]);
+        }
+      }
+    );
+
+    console.log("Printing out the allEventIds list");
+    console.log(allEvents[0]);
+
+    FB.api(
+      '/search',
+      'GET',
+      {"q":"98195","type":"event"},
+      function(response) {
+        // Insert your code here
+        var data = response.data;
+        console.log("Number of events matching that query are: " + data.length);
+        for (var i = 0; i < response.data.length; ++i) {
+          if (allEvents.indexOf(response.data[i]) == -1) {
+            allEvents.push(response.data[i]);
+          }
+        }
+      }
+    );
+
+    console.log("Printing out the allEventIds list again");
+    console.log(allEvents);
+
+    /*for (var i = 0; i < allEventIds.length; ++i) {
+      console.log(allEventIds[i]);
+    }*/
+
+    /*for (var i = 0; i < allEventIds.length; ++i) {
+      FB.api("/" + allEventIds[i], function(response) {
+          parseFacebookData(response);
+      });   
+    }*/
+
+  }
 
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.

@@ -24,52 +24,6 @@ function initialize() {
     	document.getElementById('body').style.paddingTop = "0";
     	//document.getElementById('moveLeft').style.transform = "translate3d(200px,200px,0px)";
     	//document.getElementById('moveLeft').style.animationTimingFunction = "ease-in";
-
-        FB.api(
-          '/search',
-          'GET',
-          {"q":"98105","type":"event"},
-          function(response) {
-            // Insert your code here
-            var data = response.data;
-            console.log("Number of events matching that query are: " + data.length);
-            for (var i = 0; i < response.data.length; ++i) {
-              allEventIds.push(response.data[i].id);
-            }
-          }
-        );
-        console.log("Printing out the allEventIds list");
-        console.log(allEventIds);
-
-        FB.api(
-          '/search',
-          'GET',
-          {"q":"98195","type":"event"},
-          function(response) {
-            // Insert your code here
-            var data = response.data;
-            console.log("Number of events matching that query are: " + data.length);
-            for (var i = 0; i < response.data.length; ++i) {
-              if (allEventIds.indexOf(response.data[i].id) == -1) {
-                allEventIds.push(response.data[i].id);
-              }
-            }
-          }
-        );
-        
-
-        console.log("Printing out the allEventIds list again");
-        console.log(allEventIds);
-
-        for (var i = 0; i < allEventIds.length; ++i) {
-          console.log(allEventIds[i]);
-        }
-
-        for (var i = 0; i < allEventIds.length; ++i) {
-          FB.api("/" + allEventIds[i], function(response) {
-              parseFacebookData(response);
-          });   
-        }
     }
 
     //makes a new google maps object using the latitudes and longitudes
