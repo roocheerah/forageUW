@@ -82,5 +82,6 @@ window.onload = function() {
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
+    document.getElementById('fb_button').style.visibility = "hidden";
   }
 };
