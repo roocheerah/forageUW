@@ -8,7 +8,7 @@ function initialize() {
 
     //load objects
     var find = document.getElementById('find');
-
+    var events;
     //add events
     loadData();
 
@@ -17,18 +17,17 @@ function initialize() {
     var eventLoc = [];
 
     function loadData(){
-       var events = localStorage.getItem('Events');
+       events = localStorage.getItem('Events');
        //parse to Object Literal the JSON object
        events = JSON.parse(events);
        //Checks whether the stored data exists
        if(events) {
          //Do what you need with the object
          alert("received data");
-         //If you want to delete the object
-         localStorage.removeItem('_Account');
+         alert(events);
        }
     }
-    
+
     function findEvents() {
     	document.getElementById('map-canvas').style.visibility = "visible";
     	document.getElementById('moveLeft').style.width = "35%";
