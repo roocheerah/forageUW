@@ -1,144 +1,90 @@
 "use strict";
 function initialize() {
-    //initialize map on UW
-    var mapOptions = {
-        center: { lat: 47.6550, lng: -122.3080},
-        zoom: 15
-    };
 
-    //load objects
-    var find = document.getElementById('find');
-    var events;
-    //add events
+    // global variables
+    var events;  // stack of the JSON formatted events matching given zipcode
+
+    // load data passed from the facebook API during login from local storage
     loadData();
 
-    find.addEventListener("click", findEvents);
-    var allEventIds = [];
-    var eventLoc = [];
-
+    // loads facebook event data from local storage.
     function loadData(){
        events = localStorage.getItem('Events');
+
+       //Checks whether the stored data exists
+       if (!events) {
+        return;
+       }
+      
+       //Data exists in local storage
+       alert("received data");
+       console.log(events);
+   
        //parse to Object Literal the JSON object
        for (var i =0; i < events.length; i++) {
         var temp = JSON.parse(events[i]);
         console.log(temp);
        }
-       //events = JSON.parse(events);
-       //Checks whether the stored data exists
-       if(events) {
-         //Do what you need with the object
-         alert("received data");
-         console.log(events);
-       }
     }
+ 
+    // parses event information based on (1) Description, (2) Event Time and (3) Location
+    function parseFacebookData() {
+        for (var i = 0; i < events.length; i++) {
+            var facebookEvent = events[i];
+            var eventName = facebookEvent.name;
 
-    function findEvents() {
-    	document.getElementById('map-canvas').style.visibility = "visible";
-    	document.getElementById('moveLeft').style.width = "35%";
-    	document.getElementById('moveLeft').style.float = "left";
-    	document.getElementById('map-canvas').style.float = "right";
-    	document.getElementById('map-canvas').style.width = "60%";
-    	document.getElementById('body').style.paddingTop = "0";
-    	//document.getElementById('moveLeft').style.transform = "translate3d(200px,200px,0px)";
-    	//document.getElementById('moveLeft').style.animationTimingFunction = "ease-in";
-    }
-
-    //makes a new google maps object using the latitudes and longitudes
-    function makeGoogleMapObject(latitude, longitude){
-        var latLong = new google.maps.LatLng(latitude, longitude);
-        var marker = new google.maps.Marker({
-            position: latLong,
-            map: map
-        });
-    }
-
-    //function that parses the given facebook event info and tries to get out the description of it and the location
-    function parseFacebookData(response) {
-        var name = response.name;
-        var desc = response.description;
-        console.log(desc);
-        var location = response.location;
-        var startTime = response.start_time;
-        var endTime = response.end_time;
-
-        if (checkTime(startTime, endTime)) {
-            processData(startTime, desc, location, name);
-        }
-    }
-
-    //helper method for processing Facebook event data if the key word of "free" was found in it
-    function processData(sDate, description, location, name) {
-        if (description) {
-            var free = "free";
-            var lines = description.split("\n");
-            for (var i = 0; i < lines.length; i++) {    
-                var wordsInTitle = lines[i].split(" ");
-                if (wordsInTitle) {
-                    for (var j = 0; j < wordsInTitle.length; j++) {
-                        if (wordsInTitle[j].toLowerCase() === free) { // i did this because most events do not have free written in their name
-                            geocodeLocation(sDate, description, location, name);
-                        }
-                    }
-                }
-            }       
-        }
-    } 
-
-    function geocodeLocation(sDate, description, location, name) {
-        var geoCoder = new google.maps.Geocoder();
-        var address = location;
-        geoCoder.geocode({'address': address}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-                var eventDate = sDate.split("T")[0];
-                var contentString = '<p id="eventName">Event: ' + name + '</p>' + '<p id = "startTime">Starts at: ' + eventDate + '!</p>' ;
-                attachInfoWindow(marker, contentString);
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
+            // only look through the description for any matches if the event is current or in
+            // the future.
+            if (parseTime(facebookEvent.start_time, facebookEvent.end_time)) {
+                // look through the description to find any indication of free events.
+                parseDescription(facebookEvent.description);    
             }
-        });
+        }
     }
 
-    //attach info window to given marker
-    function attachInfoWindow(marker, contentString) {
-        var infoWindow = new google.maps.InfoWindow({
-            content: contentString,
-            maxWidth: 300   
-        });
-
-        google.maps.event.addListener(marker, "click", function () {
-            infoWindow.open(map, marker);
-        });
+    // parses the facebook event description to search for keywords
+    function parseDescription(description) {
+        var keywords = ["free", "swag"];
+        var lines = description.split("[\n\t]");
+        for (var i = 0; i < lines.length; i++) {
+            var temp = line.toLowerCase();
+            for (var j = 0; j < keywords.length; j++) {
+                // TODO: Check for cases where multiple words in the keywords list is in the description
+                if (strstr(temp, keywords[j])) {
+                // found an event!
+                // put a marker on the map!
+                    geocodeLocation(sDate, description, location, name);
+                }
+            }
+        }
     }
 
     //javascript function for getting the current date and time and comparing it to the venue to see if it matches 
-    function checkDate(start, end){
+    function parseTime(start, end){
         if (end) {
-        var splitDate = end.split("-");
-        for (var i = 0; i < splitDate.length; i+=3) {
-            var year = parseInt(splitDate[i]);
-            var month = parseInt(splitDate[i+1]);
-            var day = parseInt(splitDate[i+2]);
-        }
-        var currentdate = new Date();
-        if(year < currentdate.getFullYear()){ 
-            return false; 
-        }else if (year == currentdate.getFullYear()) {
-            if(month < currentdate.getMonth()){
-                return false;
-            }else if(month == currentdate.getMonth()) {
-                return (day - currentdate.getDate() >= 0) && checkTime(start, end);
-            }else{
+            var splitDate = end.split("-");
+            for (var i = 0; i < splitDate.length; i+=3) {
+                var year = parseInt(splitDate[i]);
+                var month = parseInt(splitDate[i+1]);
+                var day = parseInt(splitDate[i+2]);
+            }
+            var currentdate = new Date();
+            if(year < currentdate.getFullYear()){ 
+                return false; 
+            } else if (year == currentdate.getFullYear()) {
+                if (month < currentdate.getMonth()){
+                    return false;
+                } else if (month == currentdate.getMonth()) {
+                    return (day - currentdate.getDate() >= 0) && checkTime(start, end);
+                } else {
+                    return true;
+                }
+            } else {
                 return true;
             }
-        }else{
-            return true;
+        } else { 
+            return true; 
         }
-    } else { 
-        return true; }
     }
 
     //check if the event time is still valid
