@@ -94,10 +94,13 @@ window.onload = function() {
 
   // Completes the logout task of the user.
   function logout() {
-    FB.logout(function(response) {
-        // Person is now logged out
-        console.log('Logged out of session');
-    });
+    FB.getLoginStatus(function(response) {
+      if (response && response.status === 'connected') {
+        FB.logout(function(response) {
+          // Person is now logged out
+          console.log('Logged out of session');
+        });
+      }
   }
 
   window.fbAsyncInit = function() {
