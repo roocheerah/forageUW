@@ -101,7 +101,7 @@ window.onload = function() {
           console.log('Logged out of session');
         });
       }
-    }
+    });
   }
 
   window.fbAsyncInit = function() {
