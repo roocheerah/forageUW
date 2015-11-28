@@ -55,6 +55,7 @@ window.onload = function() {
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
+      document.getElementById('fb_button').style.visibility = "hidden";
       // Logged into your app and Facebook.
       accessKey = response.authResponse.accessToken;
       var uid = response.authResponse.userID;
@@ -73,12 +74,15 @@ window.onload = function() {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
+      document.getElementById('fb_button').style.visibility = "hidden";
       openFunc();
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
+      console.log("inside the else statement");
       document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
+      console.log("after the dialog shows up");
       window.location.href = "http://roocheerah.github.io/forageUW/main";
       //openFunc();
     }
