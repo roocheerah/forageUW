@@ -88,26 +88,6 @@ window.onload = function() {
     }
   }
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  // Completes the logout task of the user.
-  function logout() {
-    FB.getLoginStatus(function(response) {
-      if (response && response.status === 'connected') {
-        FB.logout(function(response) {
-          // Person is now logged out
-          console.log('Logged out of session');
-        });
-      }
-    });
-  }
 
   window.fbAsyncInit = function() {
     FB.init({
@@ -135,6 +115,28 @@ window.onload = function() {
     });
   };
 
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+
+  // Completes the logout task of the user.
+  function logout() {
+    FB.getLoginStatus(function(response) {
+      if (response && response.status === 'connected') {
+        FB.logout(function(response) {
+          // Person is now logged out
+          console.log('Logged out of session');
+        });
+      }
+    });
+  }
+  
   // Load the SDK asynchronously
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
