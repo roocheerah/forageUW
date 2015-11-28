@@ -83,7 +83,7 @@ window.onload = function() {
       document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
       console.log("after the dialog shows up");
-      window.location.href = "http://roocheerah.github.io/forageUW/main";
+      //window.location.href = "http://roocheerah.github.io/forageUW/main";
       //openFunc();
     }
   }
