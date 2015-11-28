@@ -79,6 +79,7 @@ window.onload = function() {
       // they are logged into this app or not.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
+      window.location.href = "http://roocheerah.github.io/forageUW/main";
       //openFunc();
     }
   }
