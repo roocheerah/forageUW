@@ -66,7 +66,7 @@ window.onload = function() {
       //} else {
       //  window.location.href = "http://roocheerah.github.io/forageUW/";
       //}
-      window.location.href = "http://roocheerah.github.io/forageUW/";
+      //window.location.href = "http://roocheerah.github.io/forageUW/";
       // Open the modal box for login stuff 
       openFunc();
     } else if (response.status === 'not_authorized') {
