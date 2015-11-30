@@ -60,14 +60,6 @@ window.onload = function() {
       accessKey = response.authResponse.accessToken;
       var uid = response.authResponse.userID;
       // Need to have a pop-up dialog for continuing with previous users
-      //var cont = window.confirm("Continue with facebook?");
-      //if (cont) {
-        // Should redirect to a different page with the map
-      //  window.location.href = "http://roocheerah.github.io/forageUW/";
-      //} else {
-      //  window.location.href = "http://roocheerah.github.io/forageUW/";
-      //}
-      //window.location.href = "http://roocheerah.github.io/forageUW/";
       // Open the modal box for login stuff 
       openFunc();
     } else if (response.status === 'not_authorized') {
@@ -88,6 +80,14 @@ window.onload = function() {
     }
   }
 
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
 
   window.fbAsyncInit = function() {
     FB.init({
@@ -115,15 +115,6 @@ window.onload = function() {
     });
   };
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
 
   // Completes the logout task of the user.
   function logout() {
@@ -136,7 +127,7 @@ window.onload = function() {
       }
     });
   }
-  
+
   // Load the SDK asynchronously
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];

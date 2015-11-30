@@ -1,9 +1,24 @@
 "use strict"
 
 var map;
+var current_latitude;
+var current_longitude;
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }
+}
+
+function showPosition(position) {
+    current_latitude = position.coords.latitude;
+    current_longitude = position.coords.longitude; 
+}
+
 function initMap() {
+  getLocation();
   map = new google.maps.Map(document.getElementById('map-canvas'), {
-    center: { lat: 47.6550, lng: -122.3080},
+    center: { lat: current_latitude, lng: current_longitude},
     zoom: 15
   });
   google.maps.event.addDomListener(window, 'load', initialize);
