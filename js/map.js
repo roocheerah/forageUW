@@ -1,27 +1,40 @@
 "use strict"
 
 var map;
-var current_latitude;
-var current_longitude;
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    }
-}
-
-function showPosition(position) {
-    current_latitude = position.coords.latitude;
-    current_longitude = position.coords.longitude; 
-}
 
 function initMap() {
-  getLocation();
   map = new google.maps.Map(document.getElementById('map-canvas'), {
-    center: { lat: current_latitude, lng: current_longitude},
+    center: {lat: 47.6550, lng: -122.3080},
     zoom: 15
   });
+  var infoWindow = new google.maps.InfoWindow({map: map});
+
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found.');
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
   google.maps.event.addDomListener(window, 'load', initialize);
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
 }
 
 function initialize() {
@@ -45,16 +58,16 @@ function findEvents() {
 }
 
 //makes a new google maps object using the latitudes and longitudes
-function makeGoogleMapObject(latitude, longitude){
+/*function makeGoogleMapObject(latitude, longitude){
     var latLong = new google.maps.LatLng(latitude, longitude);
     var marker = new google.maps.Marker({
         position: latLong,
         map: map
     });
-}
+}*/
 
 
-function geocodeLocation(sDate, description, location, name) {
+/*function geocodeLocation(sDate, description, location, name) {
     var geoCoder = new google.maps.Geocoder();
     var address = location;
     geoCoder.geocode({'address': address}, function(results, status) {
@@ -83,4 +96,4 @@ function attachInfoWindow(marker, contentString) {
         infoWindow.open(map, marker);
     });
 }
-
+*/
