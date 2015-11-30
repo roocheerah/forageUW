@@ -46,6 +46,32 @@ function initialize() {
     find.addEventListener("click", findEvents);
 }
 
+function loadData(){
+    events = localStorage.getItem('Events');
+
+   //Checks whether the stored data exists
+   if (!events) {
+    return;
+   }
+  
+   //Data exists in local storage
+   alert("received data");
+   console.log(events);
+
+    //parse to Object Literal the JSON object
+    for (var i =0; i < events.length; i++) {
+     var temp = JSON.parse(events[i]);
+     console.log(temp);
+    }
+   //events = JSON.parse(events);
+   //Checks whether the stored data exists
+   if(events) {
+     //Do what you need with the object
+     alert("received data");
+     console.log(events);
+   }
+}
+
 function findEvents() {
 	document.getElementById('map-canvas').style.visibility = "visible";
 	document.getElementById('moveLeft').style.width = "35%";
